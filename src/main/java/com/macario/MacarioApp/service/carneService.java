@@ -15,7 +15,7 @@ public class carneService {
     private carneRepository carneRepo;
 
 
-    public List<carneModel> listarCarne(carneModel carne) {
+    public List<carneModel> listarCarne() {
         return carneRepo.findAll();
     }
 
@@ -23,10 +23,9 @@ public class carneService {
         return carneRepo.save(carne);
     }
 
-    public void eliminarCarne(carneModel carne){
-        carneRepo.delete(carne);
+    public void eliminar(Integer id_carne){
+        carneRepo.deleteById(id_carne);
     }
-
 
 
 }

@@ -24,4 +24,13 @@ public class userService {
     public void eliminar(userModel user) {
         userepo.delete(user);
     }
+
+    public userModel autenticarUsuario(String email, String password) {
+        userModel user = userepo.findByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+    }
+
 }

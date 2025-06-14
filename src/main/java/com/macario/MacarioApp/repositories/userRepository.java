@@ -6,5 +6,5 @@ import com.macario.MacarioApp.models.userModel;
 @Repository
 
 public interface userRepository  extends  JpaRepository<userModel, Integer>{
-
+    userModel findByEmail(String email);
 }

@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    color-scheme: dark;
+    font-family: Consolas;
+    font-size: 24px;
+}
+
+header{
+    text-align: center;
+    color: darkred;
+}
+
+header{
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:  10px;
+}
+
+header h1{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+header img{
+    width: 3%;
+    height: 5%;
+
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em;
+
+}
+
+.login-contenedor{
+    background-color: gray;
+    padding: 4em;
+    border-radius: 1em;
+    border: 1px solid wheat;
+    box-shadow: 0 0 1em darkgrey;
+}
+
+.login-contenedor h2{
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 1em;
+}
+
+.login-contenedor form{
+    display:  flex;
+    flex-direction: column;
+    gap:  15px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.form-group i {
+    color: #fff;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background-color: transparent;
+    color: #ccc;
+    font-size: 16px;
+}
+
+.form-group input::placeholder {
+    color: #aaa;
+}
+
+.btn-iniciar{
+    color: black;
+    background-color: #cccccc;
+    border: none;
+    width: 20em;
+    height: 4em;
+    border-radius: 1em;
+    margin-left: 8.9em;
+    cursor: pointer;
+    margin-bottom: 3em;
+    margin-top: 2em;
+    font-family: Consolas;
+}
+
+.btn-iniciar:hover {
+    color: white;
+    background-color: black;
+    border: solid 2px white;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.soporte{
+    display: flex;
+
+}
+
+.soporte p{
+    color: white;
+    font-size: 1rem;
+
+}
+
+.soporte a{
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    text-decoration-line: underline;
+    margin-left: 1em;
+}
+
+
+footer{
+    text-align: center;
+    color: darkred;
+    font-size: 1rem
+}

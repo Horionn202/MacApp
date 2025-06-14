@@ -20,8 +20,8 @@ public class frutaService {
         return frutarepo.save(fruta);
     }
 
-    public void eliminarFruta(frutaModel fruta){
-        frutarepo.delete(fruta);
+    public void eliminar(Integer id_fruta){
+        frutarepo.deleteById(id_fruta);
     }
 
 }
