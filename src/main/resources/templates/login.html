@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interfaz</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+<body>
+
+    <header>
+        <h1>MacarioApp</h1>
+        <img src="../img/logo.png" alt="">
+    </header>
+
+    <main>
+
+        <div class="login-contenedor">
+            <h2>Bienvenido de Vuelta</h2>
+
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                <i class="bi bi-person-circle"></i> <input type="email" name="email" placeholder="Correo" Obligatorio />
+                </div>
+                <div class="form-group">
+                <i class="bi bi-lock-fill"></i> <input type="password" name="password" placeholder="Contraseña" Obligatorio/>
+                    <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+                         <i class="bi bi-eye-fill" id="ojito"></i>
+                    </span>
+                </div>
+                <div class="soporte">
+                    <p>Si tienes algun problema. no dudes en contactarnos</p>
+                    <a href="">Soporte</a>
+                </div>
+                <button type="submit" class="btn-iniciar">Entrar</button>
+            </form>
+
+            <footer>
+                © 2025 MacApp grupo 1
+            </footer>
+
+
+        </div>
+
+
+    </main>
+
+
+
+
+    <script src="../scripts/ojito.js"></script>
+</body>
+</html>
