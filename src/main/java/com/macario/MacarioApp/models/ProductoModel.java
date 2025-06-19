@@ -1,7 +1,7 @@
 package com.macario.MacarioApp.models;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
+
 
 @Entity
 @Table(name = "Producto")

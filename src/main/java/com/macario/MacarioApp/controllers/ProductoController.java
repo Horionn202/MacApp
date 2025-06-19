@@ -1,14 +1,14 @@
 package com.macario.MacarioApp.controllers;
 
 
-import com.macario.MacarioApp.models.carneModel;
-import com.macario.MacarioApp.models.frutaModel;
+import com.macario.MacarioApp.models.CarneModel;
+import com.macario.MacarioApp.models.FrutaModel;
 import com.macario.MacarioApp.models.AdicionalModel;
-import com.macario.MacarioApp.models.ProductoModel;
+
 import com.macario.MacarioApp.service.adicionalService;
 import com.macario.MacarioApp.service.carneService;
 import com.macario.MacarioApp.service.frutaService;
-import com.macario.MacarioApp.service.productoService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,32 +25,52 @@ public class ProductoController {
     private carneService carservice;
     private frutaService fruservice;
     private adicionalService adiservice;
-    private productoService prodservice;
 
-    // Todos los Mostrar
-    @GetMapping("/carne")
+
+
+
+    //todas las vistas
+    @GetMapping("vista/Carne")
+    public String mostrarCarneForm(Model model) {
+        model.addAttribute("carne", new CarneModel());
+        return "carneForm";
+    }
+    @GetMapping("vista/Fruta")
+    public String mostrarFrutaForm(Model model) {
+        model.addAttribute("fruta", new FrutaModel());
+        return "frutaForm";
+    }
+    @GetMapping("vista/Adicional")
+    public String mostrarAdicionalForm(Model model) {   
+        model.addAttribute("adicional", new AdicionalModel());
+        return "adicionalForm";
+    }
+  
+
+
+
+
+    
+    // Todos los Listar 
+    @GetMapping("/vista/ListarCarne")
     public String mostrarCarne(Model model) {
         model.addAttribute("carne",carservice.listarCarne());
         return "carne";
     }
 
-    @GetMapping("/fruta")
+    @GetMapping("/vista/ListarFruta")
     public String mostrarFruta(Model model){
         model.addAttribute("fruta",fruservice.listarFrutas());
         return "fruta";
     }
 
-    @GetMapping("/adicional")
+    @GetMapping("/vista/ListarAdicional")
     public String mostrarAdicional(Model model){
         model.addAttribute("adicional",adiservice.listarAdicional());
         return "adicional";
     }
 
-    @GetMapping("/producto")
-    public String mostrarProducto(Model model){
-        model.addAttribute("producto",prodservice.listarProductos());
-        return "producto";
-    }
+
 
     //todos los Eliminar
 
@@ -72,11 +92,7 @@ public class ProductoController {
         return "redirect:/vista/ListarAdicional";
     }
 
-    @GetMapping("/eliminar/{id_producto}")
-    public String eliminarProducto(@PathVariable Integer id_producto){
-        prodservice.eliminar(id_producto);
-        return "redirect:/vista/ListarProducto";
-    }
+
 
     //todos los guardar
 
@@ -84,7 +100,7 @@ public class ProductoController {
     public String guardarCarne (@RequestParam("nombre") String nombre,
                                 @RequestParam("descripcion") String descripcion,
                                 @RequestParam("cantidad") String cantidad){
-        carneModel carne = new carneModel();
+        CarneModel carne = new CarneModel();
         carne.setNombre(nombre);
         carne.setDescripcion(descripcion);
         carne.setCantidad(Integer.parseInt(cantidad));
@@ -98,7 +114,7 @@ public class ProductoController {
     public String guardarFruta (@RequestParam("nombre") String nombre,
                                 @RequestParam("descripcion") String descripcion,
                                 @RequestParam("cantidad") String cantidad){
-        frutaModel fruta = new frutaModel();
+        FrutaModel fruta = new FrutaModel();
         fruta.setNombre(nombre);
         fruta.setDescripcion(descripcion);
         fruta.setCantidad(Integer.parseInt(cantidad));
@@ -120,21 +136,8 @@ public class ProductoController {
         return "redirect:/vista/ListarAdicional";
     }
 
-    @PostMapping("/producto/guardar")
-    public String guardarProducto (@RequestParam("nombre") String nombre,
-                                    @RequestParam("precio") double precio,
-                                    @RequestParam("cantidad") String cantidad,
-                                    @RequestParam("descripcion") String descripcion){
-        ProductoModel producto = new ProductoModel();
-        producto.setNombre(nombre);
-        producto.setPrecio(precio);
-        producto.setCantidad(cantidad);
-        producto.setDescripcion(descripcion);
-
-        prodservice.guardarProducto(producto);
-        return "redirect:/vista/ListarProducto";
-    }
 
 
+    
 
 }

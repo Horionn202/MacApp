@@ -1,7 +1,7 @@
 package com.macario.MacarioApp.service;
 
 
-import com.macario.MacarioApp.models.carneModel;
+import com.macario.MacarioApp.models.CarneModel;
 import com.macario.MacarioApp.repositories.carneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ public class carneService {
     private carneRepository carneRepo;
 
 
-    public List<carneModel> listarCarne() {
+    public List<CarneModel> listarCarne() {
         return carneRepo.findAll();
     }
 
-    public carneModel guardarCarne(carneModel carne) {
+    public CarneModel guardarCarne(CarneModel carne) {
         return carneRepo.save(carne);
     }
 
