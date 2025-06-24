@@ -47,10 +47,6 @@ public class ProductoController {
     }
   
 
-
-
-
-    
     // Todos los Listar 
     @GetMapping("/vista/ListarCarne")
     public String mostrarCarne(Model model) {
@@ -69,8 +65,6 @@ public class ProductoController {
         model.addAttribute("adicional",adiservice.listarAdicional());
         return "adicional";
     }
-
-
 
     //todos los Eliminar
 
@@ -93,7 +87,6 @@ public class ProductoController {
     }
 
 
-
     //todos los guardar
 
     @PostMapping("/carne/guardar")
@@ -108,7 +101,6 @@ public class ProductoController {
         carservice.guardarCarne(carne);
         return "redirect:/vista/ListarCarne";
     }
-
 
     @PostMapping("/fruta/guardar")
     public String guardarFruta (@RequestParam("nombre") String nombre,
