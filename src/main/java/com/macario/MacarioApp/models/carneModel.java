@@ -2,6 +2,9 @@ package com.macario.MacarioApp.models;
 
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
+
+
 
 @Entity
 @Table(name = "Carne")
@@ -13,6 +16,8 @@ public class CarneModel {
     private String nombre;
     private String descripcion;
     private Integer cantidad;
+    @Column(precision = 38, scale = 2)
+    private BigDecimal precio;
 
     //getters
 
@@ -32,6 +37,10 @@ public class CarneModel {
         return nombre;
     }
 
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
     //Setters
 
 
@@ -49,5 +58,9 @@ public class CarneModel {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
     }
 }

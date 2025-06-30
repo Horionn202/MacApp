@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pedidos</title>
+</head>
+<body>
+
+<h1>Lista de Pedidos</h1>
+
+<div th:each="pedido : ${pedidos}">
+    <hr>
+    <p><strong>Fecha:</strong> <span th:text="${#temporals.format(pedido.fecha, 'dd/MM/yyyy')}"></span></p>
+    <p><strong>Hora:</strong> <span th:text="${pedido.hora}"></span></p>
+    <p><strong>Total:</strong> S/ <span th:text="${pedido.total}"></span></p>
+
+    <!-- Carnes -->
+    <div th:if="${pedido.carnes}">
+        <h3>Carnes</h3>
+        <ul>
+            <li th:each="carne, iterStat : ${pedido.carnes}">
+                <span th:text="${carne.nombre}"></span> -
+                Cantidad: <span th:text="${pedido.cantidadCarnes[iterStat.index]}"></span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Frutas -->
+    <div th:if="${pedido.frutas}">
+        <h3>Frutas</h3>
+        <ul>
+            <li th:each="fruta, iterStat : ${pedido.frutas}">
+                <span th:text="${fruta.nombre}"></span> -
+                Cantidad: <span th:text="${pedido.cantidadFrutas[iterStat.index]}"></span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Adicionales -->
+    <div th:if="${pedido.adicionales}">
+        <h3>Adicionales</h3>
+        <ul>
+            <li th:each="adic, iterStat : ${pedido.adicionales}">
+                <span th:text="${adic.nombre}"></span> -
+                Cantidad: <span th:text="${pedido.cantidadAdicionales[iterStat.index]}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

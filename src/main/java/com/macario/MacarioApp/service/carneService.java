@@ -27,5 +27,8 @@ public class carneService {
         carneRepo.deleteById(id_carne);
     }
 
+    public CarneModel buscarPorId(Integer id_carne) {
+        return carneRepo.findById(id_carne).orElse(null);
+    }
 
 }

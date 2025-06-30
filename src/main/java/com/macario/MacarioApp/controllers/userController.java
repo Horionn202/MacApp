@@ -22,10 +22,7 @@ public class userController {
         return "login";
     }
 
-    @GetMapping("/vista/interfaz")
-    public String interfaz(){
-        return "interfaz";
-    }
+ 
 
 
     @GetMapping("/login")

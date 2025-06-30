@@ -9,6 +9,7 @@ import com.macario.MacarioApp.service.adicionalService;
 import com.macario.MacarioApp.service.carneService;
 import com.macario.MacarioApp.service.frutaService;
 
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,7 +118,7 @@ public class ProductoController {
 
     @PostMapping("/adicional/guardar")
     public String guardarAdicional (@RequestParam("nombre") String nombre,
-                                    @RequestParam("precio") double precio,
+                                    @RequestParam("precio") BigDecimal precio,
                                     @RequestParam("cantidad") String cantidad){
         AdicionalModel adicional = new AdicionalModel();
         adicional.setNombre(nombre);

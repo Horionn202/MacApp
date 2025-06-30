@@ -24,4 +24,8 @@ public class frutaService {
         frutarepo.deleteById(id_fruta);
     }
 
+    public FrutaModel buscarPorId(Integer id_fruta) {
+        return frutarepo.findById(id_fruta).orElse(null);
+    }
+
 }

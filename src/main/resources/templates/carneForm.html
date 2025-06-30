@@ -1,36 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Agregar Producto</title>
-    <link rel="stylesheet" href="../css/agregar.css">
+    <title>Crear Pedido</title>
 </head>
 <body>
 
+<h1>Nuevo Pedido</h1>
+<form th:action="@{/crear}" method="post">
 
+    <label>Fecha:</label>
+    <input type="date" name="fecha" required><br>
 
-    <div class="wrapper">
-        <div class="formulario">
-            <div class="titulo">
-                <h1>Agregar Producto</h1>
-            </div>
+    <label>Hora:</label>
+    <input type="time" name="hora" required><br><br>
 
-            <div class="form-contenedor">
-                <form action="/carne/guardar" method="post">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required><br><br>
-
-                    <label for="descripcion">Descripción:</label>
-                    <input type="text" id="descripcion" name="descripcion" required><br><br>
-
-                    <label for="precio">Cantidad:</label>
-                    <input type="number" id="cantidad" name="cantidad" required><br><br>
-
-                    <button type="submit">Guardar Producto</button>
-                </form>
-            </div>
-        </div>
+    <!-- CARNES -->
+    <h3>Carnes</h3>
+    <div th:each="carne : ${carnes}">
+        <input type="checkbox" th:name="'seleccion_carne_' + ${carne.id_carne}" />
+        <span th:text="${carne.nombre}">Nombre Carne</span>
+        Cantidad:
+        <input type="number" min="1" th:name="'cantidad_carne_' + ${carne.id_carne}" />
+        <br>
     </div>
+
+    <!-- FRUTAS -->
+    <h3>Frutas</h3>
+    <div th:each="fruta : ${frutas}">
+        <input type="checkbox" th:name="'seleccion_fruta_' + ${fruta.id_fruta}" />
+        <span th:text="${fruta.nombre}">Nombre Fruta</span>
+        Cantidad:
+        <input type="number" min="1" th:name="'cantidad_fruta_' + ${fruta.id_fruta}" />
+        <br>
+    </div>
+
+    <!-- ADICIONALES -->
+    <h3>Adicionales</h3>
+    <div th:each="adic : ${adicionales}">
+        <input type="checkbox" th:name="'seleccion_adicional_' + ${adic.id_adicional}" />
+        <span th:text="${adic.nombre}">Nombre Adicional</span>
+        Cantidad:
+        <input type="number" min="1" th:name="'cantidad_adicional_' + ${adic.id_adicional}" />
+        <br>
+    </div>
+
+    <br>
+    <button type="submit">Guardar Pedido</button>
+
+</form>
+
 </body>
 </html>
