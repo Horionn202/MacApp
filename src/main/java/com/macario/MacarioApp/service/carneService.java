@@ -31,4 +31,12 @@ public class carneService {
         return carneRepo.findById(id_carne).orElse(null);
     }
 
+    public CarneModel obtenerPorId(Integer carneId) {
+        return carneRepo.findById(carneId).orElse(null);
+    }
+
+
+        public List<CarneModel> listarTodos() {
+        return carneRepo.findAll();
+    }
 }

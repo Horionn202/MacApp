@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle de Boleta</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #fff;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 32px 28px 24px 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 4px;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+        p {
+            margin: 8px 0;
+            font-size: 1.05em;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 16px;
+        }
+        li {
+            background: #f1f7fa;
+            margin-bottom: 6px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: background 0.2s;
+        }
+        li:hover {
+            background: #e0f7fa;
+        }
+        button {
+            display: block;
+            margin: 32px auto 0 auto;
+            padding: 10px 28px;
+            background: #2980b9;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(41,128,185,0.08);
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #1a5d8f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detalle de Boleta</h1>
+
+        <p>Pedido ID: <span th:text="${boleta.pedido.id_pedido}"></span></p>
+        <p>Fecha: <span th:text="${boleta.fecha}"></span></p>
+        <p>Hora: <span th:text="${boleta.hora}"></span></p>
+        <p>Total: S/ <span th:text="${boleta.total}"></span></p>
+
+        <h2>Lo que consumió</h2>
+
+        <h3>Frutas</h3>
+        <ul>
+            <li th:each="fruta : ${boleta.pedido.frutas}" 
+                th:text="${fruta.nombre} + ' - S/ ' + ${fruta.precio}"></li>
+        </ul>
+
+        <h3>Carnes</h3>
+        <ul>
+            <li th:each="carne : ${boleta.pedido.carnes}" 
+                th:text="${carne.nombre} + ' - S/ ' + ${carne.precio}"></li>
+        </ul>
+
+        <h3>Adicionales</h3>
+        <ul>
+            <li th:each="adic : ${boleta.pedido.adicionales}" 
+                th:text="${adic.nombre} + ' - S/ ' + ${adic.precio}"></li>
+        </ul>
+
+        <button onclick="window.print()">Imprimir Boleta</button>
+    </div>
+</body>
+</html>

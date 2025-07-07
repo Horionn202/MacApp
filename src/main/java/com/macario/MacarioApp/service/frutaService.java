@@ -28,4 +28,9 @@ public class frutaService {
         return frutarepo.findById(id_fruta).orElse(null);
     }
 
+    public FrutaModel obtenerPorId(Integer frutaId) {
+        return frutarepo.findById(frutaId).orElse(null);
+    }
+
+    
 }

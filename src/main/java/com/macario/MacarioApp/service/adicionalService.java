@@ -21,15 +21,18 @@ public class adicionalService {
         return adicionalRepo.save(adicional);
     }
 
-    public AdicionalModel buscarporId (Integer id_adicional){
-        return adicionalRepo.findById(id_adicional).orElse(null);
-    }
+   public AdicionalModel buscarPorId(Integer id_adicional) {
+    return adicionalRepo.findById(id_adicional).orElse(null);
+}
 
 
     public void eliminar(Integer id_adicional) {
         adicionalRepo.deleteById(id_adicional);
     }
 
+    public AdicionalModel obtenerPorId(Integer adicionalId) {
+        return adicionalRepo.findById(adicionalId).orElse(null);
+    }
 
 
 

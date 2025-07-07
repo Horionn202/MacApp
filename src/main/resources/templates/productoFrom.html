@@ -1,34 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Crear Pedido</title>
+    <meta charset="UTF-8">
+    <title>Nuevo Pedido</title>
+    <link rel="stylesheet" href="../css/productoform.css">
 </head>
 <body>
+    <h1>Nuevo Pedido</h1>
 
-<h1>Nuevo Pedido</h1>
-
-<form th:action="@{/crear}" method="post">
+ <form action="/guardarPedido" method="post" class="form-container">
+    <h2>Nuevo Pedido</h2>
 
     <label>Fecha:</label>
-    <input type="date" name="fecha" required><br>
+    <input type="date" name="fecha" required>
 
     <label>Hora:</label>
-    <input type="time" name="hora" required><br><br>
+    <input type="time" name="hora" required>
 
-        <h3>Carnes disponibles</h3>
-        <div th:each="carne : ${carnes}">
-            <label>
-                <input type="checkbox" th:name="'seleccion_carne_' + ${carne.id_carne}" />
-                <span th:text="${carne.nombre}">Nombre carne</span>
-                Cantidad:
-                <input type="number" min="1" th:name="'cantidad_carne_' + ${carne.id_carne}" />
-            </label>
-            <br>
-        </div>
-    <br>
+    <hr>
+
+    <h3>Carnes</h3>
+    <div th:each="carne, iterStat : ${carnes}">
+        <input type="hidden" th:name="carne_id" th:value="${carne.id_carne}">
+        <span th:text="${carne.nombre}"></span> - Precio: S/ <span th:text="${carne.precio}"></span>
+        <label>Cantidad:</label>
+        <input type="number" th:name="cantidadCarne" min="0" value="0">
+        <br>
+    </div>
+
+    <hr>
+
+    <h3>Adicionales</h3>
+    <div th:each="adicional, iterStat : ${adicionales}">
+        <input type="hidden" th:name="adicional_id" th:value="${adicional.id_adicional}">
+        <span th:text="${adicional.nombre}"></span> - Precio: S/ <span th:text="${adicional.precio}"></span>
+        <label>Cantidad:</label>
+        <input type="number" th:name="cantidadAdicional" min="0" value="0">
+        <br>
+    </div>
+
+    <hr>
+
+    <h3>Frutas</h3>
+    <div th:each="fruta, iterStat : ${frutas}">
+        <input type="hidden" th:name="frutas_id" th:value="${fruta.id_fruta}">
+        <span th:text="${fruta.nombre}"></span> - Precio: S/ <span th:text="${fruta.precio}"></span>
+        <label>Cantidad:</label>
+        <input type="number" th:name="cantidadFruta" min="0" value="0">
+        <br>
+    </div>
+
+    <hr>
     <button type="submit">Guardar Pedido</button>
+    <br>
 
+        <a th:href="@{/vista/interfaz}" class="back-button">
+    ← Volver
+    </a>
 </form>
-
 </body>
 </html>

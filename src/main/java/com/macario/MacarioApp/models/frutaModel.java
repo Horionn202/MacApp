@@ -17,6 +17,9 @@ public class FrutaModel {
     @Column(precision = 38, scale = 2)
     private BigDecimal precio;
 
+    @ManyToMany(mappedBy = "frutas")
+    private java.util.List<PedidoModel> pedidos;
+
     //getters
 
 
@@ -38,6 +41,9 @@ public class FrutaModel {
 
     public BigDecimal getPrecio() {
         return precio;
+    }
+    public java.util.List<PedidoModel> getPedidos() {
+        return pedidos;
     }
 
     //Setters
@@ -61,5 +67,8 @@ public class FrutaModel {
 
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
+    }
+    public void setPedidos(java.util.List<PedidoModel> pedidos) {
+        this.pedidos = pedidos;
     }
 }

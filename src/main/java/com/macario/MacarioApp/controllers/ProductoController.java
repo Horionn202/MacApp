@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProductoController {
     @Autowired
     private carneService carservice;
+    @Autowired
     private frutaService fruservice;
+    @Autowired
     private adicionalService adiservice;
 
 
@@ -88,45 +90,53 @@ public class ProductoController {
     }
 
 
+
+
     //todos los guardar
 
     @PostMapping("/carne/guardar")
     public String guardarCarne (@RequestParam("nombre") String nombre,
                                 @RequestParam("descripcion") String descripcion,
-                                @RequestParam("cantidad") String cantidad){
+                                @RequestParam("cantidad") String cantidad,
+                                @RequestParam("precio") BigDecimal precio){
         CarneModel carne = new CarneModel();
         carne.setNombre(nombre);
         carne.setDescripcion(descripcion);
         carne.setCantidad(Integer.parseInt(cantidad));
+        carne.setPrecio(precio);
 
         carservice.guardarCarne(carne);
-        return "redirect:/vista/ListarCarne";
+        return "redirect:/vista/admin";
     }
 
     @PostMapping("/fruta/guardar")
     public String guardarFruta (@RequestParam("nombre") String nombre,
                                 @RequestParam("descripcion") String descripcion,
-                                @RequestParam("cantidad") String cantidad){
+                                @RequestParam("cantidad") String cantidad,
+                                @RequestParam("precio") BigDecimal precio){
         FrutaModel fruta = new FrutaModel();
         fruta.setNombre(nombre);
         fruta.setDescripcion(descripcion);
         fruta.setCantidad(Integer.parseInt(cantidad));
+        fruta.setPrecio(precio);
 
         fruservice.guardarFruta(fruta);
-        return "redirect:/vista/ListarFruta";
+        return "redirect:/vista/admin";
     }
 
     @PostMapping("/adicional/guardar")
     public String guardarAdicional (@RequestParam("nombre") String nombre,
                                     @RequestParam("precio") BigDecimal precio,
-                                    @RequestParam("cantidad") String cantidad){
+                                    @RequestParam("cantidad") Integer cantidad
+                                    ){
         AdicionalModel adicional = new AdicionalModel();
         adicional.setNombre(nombre);
         adicional.setPrecio(precio);
         adicional.setCantidad(cantidad);
+                                          
 
         adiservice.guardarAdicional(adicional);
-        return "redirect:/vista/ListarAdicional";
+        return "redirect:/vista/admin";
     }
 
 

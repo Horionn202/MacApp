@@ -39,15 +39,14 @@
 
        <div class="menu-wraper">
             <div class="botones">  
-                <button class="btn">Agregar Pedido</button>
-                <button class="btn">Editar Pedido</button>
-                <button class="btn">Eliminar Pedido</button>
-                <button class="btn">Generar Boleta</button>
+                <a href="/vista/crearPedido"><button class="btn" type="button">Agregar Pedido</button></a>
+               
+                 <a href="/boletas/lista" class="btn">Ver Boletas</a>
             </div>
 
             <div class="botones-abajo">
-                <button class="btn-abajo">Contacto</button>
-                <button class="btn-abajo">Soporte</button>
+                <a href="https://wa.me/51945344284" class="btn">Contacto</a>
+                 <a href="https://wa.me/51945344284" class="btn">Soporte</a>
             </div>
             
 
@@ -69,49 +68,63 @@
                 </div>
             </div>
 
-                <div class="lista-pedidos" th:each="pedido : ${pedidos}">
-                    <hr>
-                    <div class="pedido-item">
-                        <p><strong>Fecha:</strong> <span th:text="${#temporals.format(pedido.fecha, 'dd/MM/yyyy')}"></span></p>
-                        <p><strong>Hora:</strong> <span th:text="${pedido.hora}"></span></p>
-                        <p class="total"><strong>Total:</strong> S/ <span th:text="${pedido.total}"></span></p>
-                    </div>
-
-                  <div class="pedido">
-                        <div th:if="${pedido.carnes}" class="pedido-text">
-                            <h3>Carnes</h3>
-                            <ul>
-                                <li th:each="carne, i : ${pedido.carnes}">
-                                    <span th:text="${carne.nombre}"></span> 
-                                    <br>
-                                    Cantidad: <span th:text="${pedido.cantidadCarnes[carne.id_carne]}"></span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div th:if="${pedido.frutas}">
-                            <h3>Frutas</h3>
-                            <ul>
-                                <li th:each="fruta, i : ${pedido.frutas}">
-                                    <span th:text="${fruta.nombre}"></span> -
-                                    Cantidad: <span th:text="${pedido.cantidadFrutas[i.index]}"></span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div th:if="${pedido.adicionales}">
-                            <h3>Adicionales</h3>
-                            <ul>
-                                <li th:each="adic, i : ${pedido.adicionales}">
-                                    <span th:text="${adic.nombre}"></span> -
-                                    Cantidad: <span th:text="${pedido.cantidadAdicionales[i.index]}"></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>  
-                </div>
-
+            <div class="lista-pedidos" th:each="pedido, iterStat : ${pedidos}" th:id="'pedido-'+${iterStat.index}">
+    <hr>
+    <div class="pedido-item">
+        <p><strong>Fecha:</strong> <span th:text="${#temporals.format(pedido.fecha, 'dd/MM/yyyy')}"></span></p>
+        <p><strong>Hora:</strong> <span th:text="${pedido.hora}"></span></p>
+        <p class="total"><strong>Total:</strong> S/ <span th:text="${pedido.total}"></span></p>
     </div>
+
+    <div class="pedido">
+        <div th:if="${pedido.carnes != null and pedido.cantidadesCarnes != null}">
+            <h3>Carnes</h3>
+            <ul>
+                <li th:each="c, iter : ${pedido.carnes}">
+                    <span th:text="${c.nombre}"></span> -
+                    Cantidad: <span th:text="${pedido.cantidadesCarnes.size() > iter.index ? pedido.cantidadesCarnes[iter.index] : 0}"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${pedido.adicionales != null and pedido.cantidadesAdicionales != null}">
+            <h3>Adicionales</h3>
+            <ul>
+                <li th:each="a, iter : ${pedido.adicionales}">
+                    <span th:text="${a.nombre}"></span> -
+                    Cantidad: <span th:text="${pedido.cantidadesAdicionales.size() > iter.index ? pedido.cantidadesAdicionales[iter.index] : 0}"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div th:if="${pedido.frutas != null and pedido.cantidadesFrutas != null}">
+            <h3>Frutas</h3>
+            <ul>
+                <li th:each="f, iter : ${pedido.frutas}">
+                    <span th:text="${f.nombre}"></span> -
+                    Cantidad: <span th:text="${pedido.cantidadesFrutas.size() > iter.index ? pedido.cantidadesFrutas[iter.index] : 0}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="pedido-actions">
+        <a class="btn-editar" th:href="@{/editarPedido(id_pedido=${pedido.id_pedido})}">Editar</a>
+        <a class="btn-eliminar" th:href="@{/eliminarPedido(id_pedido=${pedido.id_pedido})}"
+           onclick="return confirm('¿Estás seguro de que deseas eliminar este pedido?');">Eliminar</a>
+       <a class="btn-generar" 
+   th:href="@{/boletas/generarBoleta/{id_pedido}(id_pedido=${pedido.id_pedido})}">
+   Generar Boleta
+</a>
+    </div>
+</div>
+ <div class="paginacion">
+        <button onclick="prevPage()">← Anterior</button>
+        <span id="page-info"></span>
+        <button onclick="nextPage()">Siguiente →</button>
+    </div>
+</div>
+ 
 </main>
     <footer>
         <p>&copy; 2025 Macario. Todos los derechos reservados.</p>
@@ -120,6 +133,7 @@
 
     <script src="../scripts/usericon.js"></script>
     <script src="../scripts/fecha-hora.js"></script>
+    <script src="../scripts/pasarpag.js"></script>
 
   </body>
 </html>

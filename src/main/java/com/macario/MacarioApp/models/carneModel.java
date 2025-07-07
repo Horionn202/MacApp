@@ -19,6 +19,10 @@ public class CarneModel {
     @Column(precision = 38, scale = 2)
     private BigDecimal precio;
 
+    @ManyToMany(mappedBy = "carnes")
+private java.util.List<PedidoModel> pedidos;
+
+
     //getters
 
     public Integer getCantidad() {
@@ -40,7 +44,9 @@ public class CarneModel {
     public BigDecimal getPrecio() {
         return precio;
     }
-
+    public java.util.List<PedidoModel> getPedidos() {
+        return pedidos;
+    }
     //Setters
 
 
@@ -62,5 +68,8 @@ public class CarneModel {
 
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
+    }
+    public void setPedidos(java.util.List<PedidoModel> pedidos) {
+        this.pedidos = pedidos;
     }
 }

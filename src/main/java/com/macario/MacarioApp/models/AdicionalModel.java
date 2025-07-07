@@ -15,9 +15,11 @@ public class AdicionalModel {
     private String nombre;
     @Column(precision = 38, scale = 2)
     private BigDecimal precio;
-    private String cantidad;
+    private Integer cantidad;
 
-   
+    @ManyToMany(mappedBy = "adicionales")
+private java.util.List<PedidoModel> pedidos;
+
     // Getters
     public Integer getId_adicional() {
         return id_adicional;
@@ -28,8 +30,11 @@ public class AdicionalModel {
     public BigDecimal getPrecio() {
         return precio;
     }
-    public String getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
+    }
+    public java.util.List<PedidoModel> getPedidos() {
+        return pedidos;
     }
     
     // Setters
@@ -42,10 +47,13 @@ public class AdicionalModel {
     public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
-    public void setCantidad(String cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
     
+    public void setPedidos(java.util.List<PedidoModel> pedidos) {
+        this.pedidos = pedidos;
+    }
 
 
 

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+    <style>
+        /* Reset básico */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .panel {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        h2 { margin-bottom: 10px; color: #34495e; }
+
+        button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            margin: 5px 5px 15px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        button:hover { background: #2980b9; }
+
+        form input[type="text"],
+        form input[type="number"],
+        form textarea {
+            width: 100%;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccd1d9;
+            border-radius: 4px;
+            font-size: 14px;
+            background: #fdfdfd;
+        }
+
+        form button[type="submit"] {
+            background: #27ae60;
+        }
+
+        form button[type="submit"]:hover {
+            background: #1e8449;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        th {
+            background: #2980b9;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) { background: #f9f9f9; }
+
+        .hidden { display: none; }
+    </style>
+    <script>
+        function toggleSection(id) {
+            document.querySelectorAll('.panel').forEach(panel => panel.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+    </script>
+</head>
+<body>
+<h1>Panel de Administración</h1>
+
+<!-- Botones -->
+<button onclick="toggleSection('agregarCarne')">Agregar Carne</button>
+<button onclick="toggleSection('listarCarnes')">Listar Carnes</button>
+
+<button onclick="toggleSection('agregarFruta')">Agregar Fruta</button>
+<button onclick="toggleSection('listarFrutas')">Listar Frutas</button>
+
+<button onclick="toggleSection('agregarAdicional')">Agregar Adicional</button>
+<button onclick="toggleSection('listarAdicionales')">Listar Adicionales</button>
+
+<button onclick="toggleSection('listarPedidos')">Listar Pedidos</button>
+
+<!-- Panel Agregar Carne -->
+<div class="panel hidden" id="agregarCarne">
+    <h2>Agregar Carne</h2>
+    <form th:action="@{/carne/guardar}" th:object="${carne}" method="post">
+        <input type="hidden" th:field="*{id_carne}" />
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required />
+        <label>Descripción:</label>
+        <textarea th:field="*{descripcion}"></textarea>
+        <label>Cantidad:</label>
+        <input type="number" th:field="*{cantidad}" min="0" required />
+        <label>Precio:</label>
+        <input type="number" th:field="*{precio}" step="0.01" min="0" required />
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+
+<!-- Panel Listar Carnes -->
+<div class="panel hidden" id="listarCarnes">
+    <h2>Lista de Carnes</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Nombre</th><th>Descripción</th><th>Cantidad</th><th>Precio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car : ${carnes}">
+            <td th:text="${car.id_carne}">1</td>
+            <td th:text="${car.nombre}">Nombre</td>
+            <td th:text="${car.descripcion}">Desc</td>
+            <td th:text="${car.cantidad}">0</td>
+            <td>S/ <span th:text="${car.precio}">0.00</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Panel Agregar Fruta -->
+<div class="panel hidden" id="agregarFruta">
+    <h2>Agregar Fruta</h2>
+    <form th:action="@{/fruta/guardar}" th:object="${fruta}" method="post">
+        <input type="hidden" th:field="*{id_fruta}" />
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required />
+        <label>Descripción:</label>
+        <textarea th:field="*{descripcion}"></textarea>
+        <label>Cantidad:</label>
+        <input type="number" th:field="*{cantidad}" min="0" required />
+        <label>Precio:</label>
+        <input type="number" th:field="*{precio}" step="0.01" min="0" required />
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+
+<!-- Panel Listar Frutas -->
+<div class="panel hidden" id="listarFrutas">
+    <h2>Lista de Frutas</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Nombre</th><th>Descripción</th><th>Cantidad</th><th>Precio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fru : ${frutas}">
+            <td th:text="${fru.id_fruta}">1</td>
+            <td th:text="${fru.nombre}">Nombre</td>
+            <td th:text="${fru.descripcion}">Desc</td>
+            <td th:text="${fru.cantidad}">0</td>
+            <td>S/ <span th:text="${fru.precio}">0.00</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Panel Agregar Adicional -->
+<div class="panel hidden" id="agregarAdicional">
+    <h2>Agregar Adicional</h2>
+    <form th:action="@{/adicional/guardar}" th:object="${adicional}" method="post">
+        <input type="hidden" th:field="*{id_adicional}" />
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required />
+        <label>Precio:</label>
+        <input type="number" th:field="*{precio}" step="0.01" min="0" required />
+        <label>Cantidad:</label>
+        <input type="number" th:field="*{cantidad}" min="0" required />
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+
+<!-- Panel Listar Adicionales -->
+<div class="panel hidden" id="listarAdicionales">
+    <h2>Lista de Adicionales</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Nombre</th><th>Cantidad</th><th>Precio</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="adi : ${adicionales}">
+            <td th:text="${adi.id_adicional}">1</td>
+            <td th:text="${adi.nombre}">Nombre</td>
+            <td th:text="${adi.cantidad}">0</td>
+            <td>S/ <span th:text="${adi.precio}">0.00</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Panel Listar Pedidos -->
+<div class="panel hidden" id="listarPedidos">
+    <h2>Lista de Pedidos</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Fecha</th><th>Hora</th><th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ped : ${pedidos}">
+            <td th:text="${ped.id_pedido}">1</td>
+            <td th:text="${#temporals.format(ped.fecha, 'dd/MM/yyyy')}">01/01/2025</td>
+            <td th:text="${ped.hora}">12:00</td>
+            <td>S/ <span th:text="${ped.total}">0.00</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

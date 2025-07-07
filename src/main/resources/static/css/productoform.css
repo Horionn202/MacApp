@@ -1,0 +1,94 @@
+/* Fondo general */
+body {
+    background-color: #f4f6f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+/* Contenedor principal del formulario */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 30px;
+}
+
+/* Título */
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Etiquetas */
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+/* Inputs y selects */
+.form-container input[type="number"],
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Botón enviar */
+.form-container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 20px;
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 8px 12px;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+/* Responsive: ajusta el padding en móviles */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px;
+    }
+}

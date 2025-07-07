@@ -6,8 +6,9 @@
 <body>
 
 <h1>Nuevo Pedido</h1>
-<form th:action="@{/carne/guardar}" th:object="${carne}" method="post">
-    <input type="hidden" th:field="*{id_carne}" />
+
+<form th:action="@{/fruta/guardar}" th:object="${fruta}" method="post">
+    <input type="hidden" th:field="*{id_fruta}" />
 
     <div>
         <label for="nombre">Nombre:</label>
@@ -27,11 +28,13 @@
     <div>
         <label for="precio">Precio:</label>
         <input type="number" id="precio" th:field="*{precio}" step="0.01" min="0" required />
+    </div>
 
     <div>
         <button type="submit">Guardar</button>
     </div>
 </form>
+
 
 
 </body>

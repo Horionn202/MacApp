@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pedido</title>
+    <link rel="stylesheet" href="../css/interfaz.css">
+</head>
+<body>
+
+<header>
+    <div class="header">
+        <div class="logo">
+            <a href="/vista/interfaz"><b>Macario</b></a>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li class="user-menu">
+                    <a href="javascript:void(0);" id="userIcon">
+                        <i class="fa-solid fa-user icon-user"></i>
+                    </a>
+                    <div id="logoutMenu" class="logout-menu hidden">
+                        <a href="/vista/login">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="main-wraper">
+        <div class="main-header">
+            <h1>Editar Pedido</h1>
+        </div>
+
+        <form th:action="@{/editarPedido}" method="post" class="formulario-editar">
+            <input type="hidden" name="id_pedido" th:value="${pedido.id_pedido}" />
+
+            <div class="campo">
+                <label>Fecha:</label>
+                <input type="date" name="fecha" th:value="${pedido.fecha}">
+            </div>
+
+            <div class="campo">
+                <label>Hora:</label>
+                <input type="time" name="hora" th:value="${pedido.hora}">
+            </div>
+
+            <div class="campo">
+                <label>Carne:</label>
+                <select name="carne_id">
+                    <option value="">-- Seleccionar --</option>
+                    <option th:each="carne : ${carnes}" 
+                            th:value="${carne.id_carne}" 
+                            th:text="${carne.nombre}"
+                            th:selected="${pedido.carne != null} ? ${carne.id_carne == pedido.carne.id_carne} : false">
+                    </option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>Cantidad Carne:</label>
+                <input type="number" name="cantidadCarne" min="0" th:value="${pedido.cantidadCarne}">
+            </div>
+
+            <div class="campo">
+                <label>Fruta:</label>
+                <select name="frutas_id">
+                    <option value="">-- Seleccionar --</option>
+                    <option th:each="fruta : ${frutas}" 
+                            th:value="${fruta.id_fruta}" 
+                            th:text="${fruta.nombre}"
+                            th:selected="${pedido.frutas != null} ? ${fruta.id_fruta == pedido.frutas.id_fruta} : false">
+                    </option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>Cantidad Fruta:</label>
+                <input type="number" name="cantidadFruta" min="0" th:value="${pedido.cantidadFruta}">
+            </div>
+
+            <div class="campo">
+                <label>Adicional:</label>
+                <select name="adicional_id">
+                    <option value="">-- Seleccionar --</option>
+                    <option th:each="adic : ${adicionales}" 
+                            th:value="${adic.id_adicional}" 
+                            th:text="${adic.nombre}"
+                            th:selected="${pedido.adicional != null} ? ${adic.id_adicional == pedido.adicional.id_adicional} : false">
+                    </option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>Cantidad Adicional:</label>
+                <input type="number" name="cantidadAdicional" min="0" th:value="${pedido.cantidadAdicional}">
+            </div>
+
+            <div class="botones-form">
+                <button type="submit" class="btn">Guardar Cambios</button>
+                <a href="/vista/interfaz" class="btn-cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Macario. Todos los derechos reservados.</p>
+</footer>
+
+<script src="../scripts/usericon.js"></script>
+</body>
+</html>

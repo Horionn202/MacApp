@@ -36,33 +36,17 @@ public class pedidoService {
         pedidorepo.deleteById(id_pedido);
     }
 
-
-    public void calcularTotal(PedidoModel pedido){
+    public BigDecimal calcularTotal(List<PedidoModel> pedidos) {
         BigDecimal total = BigDecimal.ZERO;
-        if(pedido.getCarnes() !=null && pedido.getCantidadCarnes() != null) {
-           for (CarneModel carne : pedido.getCarnes()) {
-            Integer cantidad = pedido.getCantidadCarnes().get(carne.getId_carne());
-            if (cantidad != null) {
-                total = total.add(carne.getPrecio().multiply(BigDecimal.valueOf(cantidad)));
-                 }
-            }
+        for (PedidoModel pedido : pedidos) {
+            total = total.add(pedido.getTotal());
         }
-
-        if(pedido.getFrutas() !=null && pedido.getCantidadFrutas() != null) {
-            for (FrutaModel fruta : pedido.getFrutas()) {
-                Integer cantidad = pedido.getCantidadFrutas().get(fruta.getId_fruta());
-                if (cantidad != null) {
-                    total = total.add(fruta.getPrecio().multiply(BigDecimal.valueOf(cantidad)));
-                }
-            }
-        }
-
-        if(pedido.getAdicionales() !=null) {
-            for (AdicionalModel adicional : pedido.getAdicionales()) {
-                total = total.add(adicional.getPrecio());
-            }
-        }
-
-        pedido.setTotal(total);
+        return total;
     }
+
+
+    
+    
+
+  
 }

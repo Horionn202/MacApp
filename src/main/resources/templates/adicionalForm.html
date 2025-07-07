@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Pedido</title>
+</head>
+<body>
+
+<h1>Nuevo Pedido</h1>
+
+    <form th:action="@{/adicional/guardar}" th:object="${adicional}" method="post">
+        <input type="hidden" th:field="*{id_adicional}" />
+
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required />
+        </div>
+
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" th:field="*{precio}" step="0.01" min="0" required />
+        </div>
+
+        <div>
+            <label for="cantidad">Cantidad:</label>
+            <input type="text" id="cantidad" th:field="*{cantidad}" required />
+        </div>
+
+        <div>
+            <button type="submit">Guardar</button>
+        </div>
+    </form>
+
+
+
+</body>
+</html>

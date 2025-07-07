@@ -30,7 +30,7 @@ public class userController {
         if (error!=null){
             model.addAttribute("error","Correo o contraseña Incorrecta");
         }
-        return "login";
+        return "index";
     }
 
     @PostMapping("/login")
